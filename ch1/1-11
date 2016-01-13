@@ -1,0 +1,22 @@
+#lang racket
+
+#|习题1.11 递归|#
+(define (f n)
+  (if (< n 3)
+     n
+     (+ (f (- n 1)) (* 2 (f (- n 2))) (* 3 (f (- n 3)))))
+  )
+(f 4);
+
+#|习题1.11 迭代|#
+(define (f2 n)
+  (f2-iter 2 1 0 0 n)
+  )
+
+(define (f2-iter a b c i n)
+  (if (= i n)
+     c
+     (f2-iter (+ a (* 2 b) (* 3 c)) a b (+ i 1) n))
+  )
+
+(f2 4)
