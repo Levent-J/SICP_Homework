@@ -1,0 +1,9 @@
+#lang racket
+(define (multiply b n)
+  (cond ((= b 0) 0)
+        ((even? n) ())
+        (else ))
+  )
+(define (even? n)
+  ()
+  )

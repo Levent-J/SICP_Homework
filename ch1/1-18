@@ -1,0 +1,11 @@
+#lang racket
+
+(define (multiply x n)
+  (multiply-iter x n x)
+  )
+(define (multiply-iter x counter product)
+  (if (= counter 1)
+      product
+      (multiply-iter x (- counter 1) (+ x product)))
+  )
+(multiply 12 3)
