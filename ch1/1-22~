@@ -1,0 +1,35 @@
+#lang racket
+#|生成奇数|#
+(define (next-odd x)
+  (if (odd? x) (+ 2 x) (+ 1 x))
+  )
+(define (odd x)
+  (= (remainder x 2) 0)
+  )
+
+#|检测素数|#
+(define (prime? n)
+  (= n (smallest-divisor n))
+  )
+(define (smallest-divisor n)
+  (find-divisor n 2)
+  )
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+        ((divides? n test-divisor) test-divisor)
+        (else (find-divisor n (+ test-divisor 1))))
+  )
+(define (divides? a b)
+  (= (remainder a b) 0)
+  )
+(define (square x)
+  (* x x)
+  )
+#|生成连续素数|#
+(define (continue-prime n count)
+  (cond ((= count 0) (display "that's all"))
+        ((prime? n) (display n) (newline) (continue-prime (next-odd n) (- count 1)))
+        (else (continue-prime (next-odd n) count)))
+  )
+
+(continue-prime 1000 3)
