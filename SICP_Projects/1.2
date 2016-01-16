@@ -1,0 +1,19 @@
+#lang racket
+(define a 3)
+(define b 4)
+(= a b)
+(if (and (> b a) (< b (* a b))) b a)
+(cond (
+     (= a 4) 6)
+     ((= b 4) (+ 6 7 a))
+     (else 25))
+(+ 2 (if (< a b)b a))
+(* (cond ((> a b) a) ((< a b) b)) (+ a 1))
+4/5
+(/ 4 2)
+(define (bigsum a b c)
+  (cond ((and (< a b) (< a c)) (+ b c))
+       ((and (< b a) (< b c)) (+ a c))
+       ((and (< c a) (< c b)) (+ b a)))
+  )
+(bigsum 1 2 3)
