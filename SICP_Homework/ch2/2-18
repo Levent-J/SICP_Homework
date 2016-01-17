@@ -1,0 +1,10 @@
+#lang racket
+(define (reverse list)
+  (reverse-iter list '())
+  )
+(define (reverse-iter list result)
+  (if (null? list)
+      result
+      (reverse-iter (cdr list) (cons (car list) result)))
+  )
+(reverse (list 1 2 3 4 5))

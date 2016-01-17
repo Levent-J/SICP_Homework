@@ -1,0 +1,16 @@
+#lang racket
+(define (last list)
+  (if (null? list)
+      (display "null")
+      (last-iter list (- (length list) 1)))
+  )
+(define (last-iter list n)
+  (cond ((= n 0) (car list))
+        (else (last-iter (cdr list) (- n 1))))
+  )
+(define (length list)
+  (if (null? list)
+      0
+      (+ 1 (length (cdr list))))
+  )
+(last (list 1 2 3 4 5))

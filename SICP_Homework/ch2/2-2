@@ -1,0 +1,17 @@
+#lang racket
+(define (make-point x y) (cons x y))
+(define (point-x p) (car p))
+(define (point-y p) (cdr p))
+(define (make-seg start-point end-point) (cons start-point end-point))
+(define (seg-start seg) (car seg))
+(define (seg-end seg) (cdr seg))
+(define (mid-point seg)
+  (make-point (average (car (seg-start seg)) (car (seg-end seg)))
+              (average (cdr (seg-start seg)) (cdr (seg-end seg))))
+  )
+(define (average x y) (/ (+ x y) 2))
+#|测试|#
+(define x (make-point 1 2))
+(define y (make-point 3 4))
+(define seg (make-seg x y))
+(mid-point seg)
