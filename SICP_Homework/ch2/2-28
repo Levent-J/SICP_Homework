@@ -1,0 +1,17 @@
+#lang racket
+(define (fringe tree)
+  (cond ((empty? tree) '())
+        ((leaf? tree) (list tree))
+        (else (append (fringe (left-branch tree))
+                      (fringe (right-branch tree)))))
+  )
+
+(define (empty? tree) (null? tree))
+(define (leaf? tree) (not (pair? tree)))
+(define (make-tree left right) (list left right))
+(define (left-branch tree) (car tree))
+(define (right-branch tree) (cdr tree))
+
+(define t (list (list 1 2) (list 3 4)))
+(fringe t)
+(display "Fuck the 吴秉阳")
