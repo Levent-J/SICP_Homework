@@ -1,0 +1,42 @@
+#lang racket
+(define (accumulate op initial seq)
+  (if (null? seq)
+      initial
+      (op (car seq)
+          (accumulate op initial (cdr seq))))
+  )
+
+(define (map proc items)
+  (if (null? items)
+      null
+      (cons (proc (car items))
+            (map proc (cdr items))))
+  )
+
+(define (flatmap proc seq)
+  (accumulate append null (map proc seq))
+  )
+
+(define (enumerate-interval low high)
+  (if (> low high)
+      null
+      (cons low (enumerate-interval (+ low 1) high)))
+  )
+
+(define (unique-pairs n)
+  (flatmap (lambda (i) (map (lambda (j) (list i j)) (enumerate-interval 1 (- i 1)))) (enumerate-interval 1 n)))
+
+(define (unique-triples n)
+  (flatmap (lambda (i) (map (lambda (j) (cons i j)) (unique-pairs (- i 1)))) (enumerate-interval 1 n))
+  )
+
+(define (triple-sum-equal-to? sum triple)
+  (= sum (+ (car triple)
+            (cadr triple)
+            (caddr triple)))
+  )
+
+(define (remove-triples-not-sum-equal-to sum triple)
+  (filter (lambda (current-triple) (triple-sum-equal-to? sum current-triple)) triple)
+  )
+(remove-triples-not-sum-equal-to 6  (unique-triples 6))
